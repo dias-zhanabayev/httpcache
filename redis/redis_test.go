@@ -13,6 +13,7 @@ func TestRedisCache(t *testing.T) {
 		// TODO: rather than skip the test, fall back to a faked redis server
 		t.Skipf("skipping test; no server running at localhost:6379")
 	}
+	defer conn.Close()
 	conn.Do("FLUSHALL")
 
 	test.Cache(t, NewWithClient(conn))
